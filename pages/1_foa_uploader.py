@@ -1,9 +1,14 @@
-from os import path
-from xml.etree.ElementTree import PI
 # import libraries
+from os import path
 import streamlit as st
 import tkinter as tk
 from tkinter import filedialog
+import cv2
+import numpy as np
+
+
+col1, col2, col3 = st.columns([1,2,1])
+img_file_buffer = col1.camera_input("Prise des photos terrain")
 
 
 def save_uploadedfile(uploadedfile, destination_path):
@@ -18,21 +23,18 @@ root.withdraw()
 root.wm_attributes('-topmost', 1)
 
 # Folder picker button
-st.title('Transfert de dossier')
-col1, col2, col3 = st.columns([1,3,1])
+col2.title('Transfert de dossier')
 # clicked = col1.button('Selectionne un dossier')
 # if clicked:
 #     dirname = st.text_input('Selected folder:', filedialog.askdirectory(master=root))
 
 # c6upload = st.file_uploader('Mettre la c6 a traiter', type="xlsx", accept_multiple_files=True, key=None, help=None, on_change=None )
-
-col3.markdown("**Please fill the below form :**")
-with st.form(key="Renseigner les info nécéssaire:", clear_on_submit = False):
-    Room_number  = st.text_input('numéros de la chambre')
-    commande = st.text_input("N° de commande : ")
-    Adresse = st.text_input("Adresse: ")
-    Type = st.selectbox('type  de chambre',['OHN','K1C', 'K2C', 'L1T', 'L2T', 'L3T']  )	
-    Pictures = st.file_uploader(label = "Upload picture", type=["jpeg","png", "JPG"], accept_multiple_files=True)
+with col2.form(key="Renseigner les info nécéssaire:", clear_on_submit = False):
+    Room_number  = col2.text_input('numéros de la chambre')
+    commande = col2.text_input("N° de commande : ")
+    Adresse = col2.text_input("Adresse: ")
+    Type = col2.selectbox('type  de chambre',['OHN','K1C', 'K2C', 'L1T', 'L2T', 'L3T']  )	
+    Pictures = col2.file_uploader(label = "Upload picture", type=["jpeg","png", "JPG"], accept_multiple_files=True)
     Submit = st.form_submit_button(label='Submit')
     
 
@@ -44,8 +46,24 @@ if Submit :
     for uploadedFile in Pictures:
         print(uploadedFile.name)
         save_uploadedfile(uploadedFile, save_folder)
+        col3.image(uploadedFile)
 
-
-        # st.write(pict.name, save_folder)
+        # col2.write(pict.name, save_folder)
     # save_uploadedfile(Pictures, save_folder)
-    st.markdown("**The file is sucessfully Uploaded.**")
+    col2.markdown("**The file is sucessfully Uploaded.**")
+# with col3:
+
+#     if img_file_buffer is not None:
+#     # To read image file buffer with OpenCV:
+#         bytes_data = img_file_buffer.getvalue()
+#     cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
+
+#     # Check the type of cv2_img:
+#     # Should output: <class 'numpy.ndarray'>
+#     st.write(type(cv2_img))
+
+#     # Check the shape of cv2_img:
+#     # Should output shape: (height, width, channels)
+#     st.write(cv2_img.shape)
+
+
