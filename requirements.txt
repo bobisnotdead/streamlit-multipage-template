@@ -1,4 +1,6 @@
---find-links=https://girder.github.io/large_image_wheels GDAL
+--find-links=https://girder.github.io/large_image_wheels GDAL 
+exifread
+gpsphoto
 geemap
 geopandas
 jupyter-server-proxy
