@@ -22,10 +22,8 @@ with col1.form(key="Renseigner les info nécéssaire:", clear_on_submit = False)
     selected_pm = col1.selectbox('liste des SRO', get_chambre.get_pm_by_sro(selected_sro))
     selected_art = col1.text_input('entre le numéro de l\'ART',)
     seeked_pt = col1.text_input('tape un numéro d\'apuie', value="", max_chars=None, key=None)
-
     Pictures = col1.file_uploader(label = "Upload pictures", type=["jpeg","png", "JPG"], accept_multiple_files=True)
-    c6xlsx = col1.file_uploader(label = "Upload c6", type='xlsx', accept_multiple_files=True)
-    
+    c6xlsx = col1.file_uploader(label = "Upload c6", type='xlsx', accept_multiple_files=True)    
     Submit = st.form_submit_button(label='Submit')
     
 
