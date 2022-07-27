@@ -1,4 +1,5 @@
 # import libraries
+from distutils.command.upload import upload
 from os import path
 import streamlit as st
 import tkinter as tk
@@ -40,12 +41,16 @@ with col2.form(key="Renseigner les info nécéssaire:", clear_on_submit = False)
 
 if Submit :
     # Save uploaded file to 'F:/tmp' folder.
-    save_folder = '/home/acid/Pictures/Input_folder/'
+    save_folder = '/home/acid/Pictures/Input_folder/foa/'
     print(Adresse)
     print(Pictures)
+    i=0
     for uploadedFile in Pictures:
         print(uploadedFile.name)
+        ext = uploadedFile.name.split(".")[-1] 
+        uploadedFile.name ='{}_{}_{}_{}_{}.{}'.format(Room_number,commande,Adresse,Type,i,ext)
         save_uploadedfile(uploadedFile, save_folder)
+        i+=1
         col3.image(uploadedFile)
 
         # col2.write(pict.name, save_folder)

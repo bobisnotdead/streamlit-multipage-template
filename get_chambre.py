@@ -18,6 +18,6 @@ def get_picture_by_art(selected_sro, selected_pm):
             art_list.append(folder)
     return art_list
 
-get_picture_by_art()
+# get_picture_by_art()
 
 
