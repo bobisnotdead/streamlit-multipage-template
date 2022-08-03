@@ -11,11 +11,11 @@ def get_pm_by_sro(selected_sro):
 
 def get_picture_by_art(selected_sro, selected_pm):
     art_list = [] 
-    pm_folder = path.join(retour,selected_sro, selected_pm) 
+    pm_folder = path.join(retour,selected_sro, selected_pm, 'rapBE') 
     for folder in listdir(pm_folder):
         art = path.join(pm_folder,folder) 
-        if 'PHOTOS' in listdir(art):
-            art_list.append(folder)
+        # if 'PHOTOS' in listdir(art):
+        art_list.append(listdir(path.dirname(art)))
     return art_list
 
 # get_picture_by_art()

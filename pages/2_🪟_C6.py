@@ -20,7 +20,7 @@ col1, col2 = st.columns([1,3])
 with col1.form(key="Renseigner les info nécéssaire:", clear_on_submit = False):
     selected_sro = col1.selectbox('liste des NRO', get_chambre.sro_list)
     selected_pm = col1.selectbox('liste des SRO', get_chambre.get_pm_by_sro(selected_sro))
-    selected_art = col1.text_input('entre le numéro de l\'ART',)
+    selected_art = col1.selectbox('liste des art', get_chambre.get_picture_by_art(selected_sro, selected_pm))
     seeked_pt = col1.text_input('tape un numéro d\'apuie', value="", max_chars=None, key=None)
     Pictures = col1.file_uploader(label = "Upload pictures", type=["jpeg","png", "JPG"], accept_multiple_files=True)
     c6xlsx = col1.file_uploader(label = "Upload c6", type='xlsx', accept_multiple_files=True)    

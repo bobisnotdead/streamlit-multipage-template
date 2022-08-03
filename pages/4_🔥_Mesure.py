@@ -1,6 +1,6 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
-from os import mkdir, path
+from os import mkdir, path, listdir, rename, chdir
 st.set_page_config(layout="wide")
 
 markdown = """
@@ -50,5 +50,9 @@ if Submit :
     for uploadedFile in sorfiles:
         print(uploadedFile.name)
         # ext = uploadedFile.name.split(".")[-1] 
-        uploadedFile.name = '{}_{}'.format(nom,uploadedFile.name)
+        filep = uploadedFile.name.replace("-","_") 
+        filename = '{}-{}_{}'.format(nom, filep.split("_")[10],filep.split("_")[11])
         save_uploadedfile(uploadedFile, save_folder)
+
+    # st.download_button('click ici pour download les mesure traité')
+st.write('pour raffracraichir apui  sur f5 gland')
