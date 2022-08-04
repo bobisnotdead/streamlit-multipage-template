@@ -3,7 +3,6 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import pickle
 from os import listdir, path
 import sqlite3
 
@@ -15,9 +14,9 @@ c = conn.cursor()
 
 # c6_test_db = path.join(c6_database_folder, 'PM_1ART 1486294_Vouillé_86Z_C6.p')
 # c6_xlsx = path.join(c6_database_folder,'PM_1ART 1486294_Vouillé_86Z_C6.xlsx')
-nro = {'nro'}
 
 def get_nro():
+    nro = {'nro'}
     for file in listdir(c6_database_folder):
         nro.add(file.split('_')[0])
         # print(file)
@@ -30,9 +29,10 @@ def pandas_exctract(c6):
     # appui = df['N° appui'].dropna() 
     return df[df['N° appui'].notna()] 
 
-def read_all(folder, nro):
+def read_all(folder,nro):
     dicdf = {} 
     for file in listdir(folder):
+        # if file.endswith('.xlsx') :
         if file.endswith('.xlsx') and file.startswith(nro):
             df = pandas_exctract(path.join(folder, file)) 
             dicdf[file.split('_')[2]] = df 
@@ -43,6 +43,6 @@ def read_all(folder, nro):
     return dicdf
 
 
-data = read_all('/home/acid/Documents/c6_to_send/','BVR')
+# data = read_all('/home/acid/Documents/c6_to_send/','BVR')
 
-print(data)
+# print(data)
