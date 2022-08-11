@@ -1,8 +1,11 @@
+from functools import cache
 import streamlit as st
 import leafmap.foliumap as leafmap
 from os import path
 import get_chambre 
+import Classe_poteau
 
+@cache
 def save_uploadedfile(uploadedfile, destination_path):
      with open(path.join(destination_path, uploadedfile.name),"wb") as f:
          f.write(uploadedfile.getbuffer())
