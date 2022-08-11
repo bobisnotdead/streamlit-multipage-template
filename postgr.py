@@ -1,10 +1,21 @@
 import psycopg2
 import sqlalchemy as sa
 import explore_db
+from os import listdir
+import configlog
 
-engine = sa.create_engine('postgresql://acid: q@localhost:5432/darkpad')
-nro = explore_db.get_nro()
+
+engine = sa.create_engine(configlog.engine)
 dicodf = explore_db.read_all('/home/acid/Documents/c6_to_send/','BVR')
+
+def get_nro():
+    nro = {'nro'}
+    for file in listdir():
+        nro.add(file.split('_')[0])
+        # print(file)
+    return nro
+
+nro = get_nro()
 
 def get_table_from_dict(c6dict):
     for key, value in c6dict.items():
@@ -17,7 +28,7 @@ get_table_from_dict(dicodf)
 
 def oldway():
     try:
-        connect_str = "dbname='darkpad' user='acid' host='localhost' " + "password=' q'"
+        connect_str = configlog.connection
         # use our connection values to establish a connection
         conn = psycopg2.connect(connect_str)
         # create a psycopg2 cursor that can execute queries

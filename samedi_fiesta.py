@@ -21,9 +21,10 @@ height = 400
 
 def read_picture_name(c6xlsx):
     dicoart = {}
+    print(path.basename(c6xlsx))
     nro = path.basename(c6xlsx)[2:5]
     sro = path.basename(c6xlsx).split("_")[1]
-    pa = path.basename(c6xlsx).split("_")[-3]
+    # pa = path.basename(c6xlsx).split("_")[-3]
     art = path.basename(c6xlsx).split("_")[-2]
     ptname_row = {}
     wb = openpyxl.load_workbook(c6xlsx)
@@ -36,6 +37,7 @@ def read_picture_name(c6xlsx):
                 pt_num = pt_name.split("_")[0]
                 ptname_row[pt_num] = row
                 # dicoart[art] += pt_num
+    return [nro, sro, pa, art], ptname_row
     return [nro, sro, pa, art], ptname_row
 
 # 
@@ -88,8 +90,11 @@ def add_tete_picture_to_c6(pt_name_row):
         ptnum_tetepath[pt_num] = path.join(tete, pict)
     for key in pt_name_row.keys():
         # print(key)
-        if key in ptnum_tetepath or "0"+key in ptnum_tetepath:
+        if key in ptnum_tetepath :
             export[pt_name_row[key]] = ptnum_tetepath[key]
+        if "0"+key in ptnum_tetepath:
+            export[pt_name_row["0" + key]] = ptnum_tetepath["0"+key]
+
     # print(export)
     return export
 
@@ -103,8 +108,11 @@ def add_sit_picture_to_c6(pt_name_row):
         ptnum_tetepath[pt_num] = path.join(site, pict)
     for key in pt_name_row.keys():
         # print(key)
-        if key in ptnum_tetepath or "0"+key in ptnum_tetepath:
+        if key in ptnum_tetepath:
             export[pt_name_row[key]] = ptnum_tetepath[key]
+        if "0"+key in ptnum_tetepath:
+            export[pt_name_row["0" + key]] = ptnum_tetepath["0"+key]
+
     # print(export)
     return export
 
