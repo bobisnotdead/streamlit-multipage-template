@@ -7,14 +7,14 @@ import configlog
 
 width = 330
 height = 400
-
+postgr.
 class Pt:
     # print("nouvelle appui creér")
     def __init__(self, pt_num):
         self.ptnum = pt_num
 
     def get_gps(self):
-        self.gps_coord = postdr
+        self.gps_coord = post
 
         return self.gps_coord
 
